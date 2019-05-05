@@ -8,3 +8,4 @@ Some simple utilities to help with managing large sets of files.
 # search.py
 - This script invokes zgrep to search through many archives for the specified word.
 - Usage: ``python3 search.py searchstring``
+- Issues: sometimes cannot decode certain foreign language encodings with just utf-8.
