@@ -66,9 +66,8 @@ def grabList():
 
 def saveOutput():
 	global results
-	outFilePath = "../hashes/"
 	outFileName = "list.hash"
-	new_new = open(outFilePath+outFileName, "w")
+	new_new = open(outFileName, "w")
 	for x in results:
 		new_new.write(x+"\n")
 	new_new.close()
