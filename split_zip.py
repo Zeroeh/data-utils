@@ -30,7 +30,6 @@ def main():
 	unzipcmd = "tar -xzf {}/../{} -C {}/tmp --strip-components {}".format(cwd, target_file, cwd, strip_amt)
 	p = subprocess.run([unzipcmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
 	#stage 2: get the sizes of the files and _attempt_ to split the contents into 2 even sizes portions
-	#todo: rename the files
 	flist = os.listdir(cwd+"/tmp")
 	counter = 0
 	for fl in flist:
@@ -77,13 +76,13 @@ def main():
 	for x in collection1:
 		zlist += " ./tmp/"+x
 	#return these files to the "original" archive
-	zip1cmd = "tar cvf {} {}".format(target_file, zlist)
+	zip1cmd = "GZIP=-9 tar cvf {} {} --gzip".format(target_file, zlist)
 	p2 = subprocess.run([zip1cmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
 	#now remove the files
 	rmcmd = "rm {}".format(zlist)
 	p3 = subprocess.run([rmcmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
 	#zip whatever is left in the tmp folder as the new zip file
-	zip2cmd = "tar cvf {} {}".format(new_file, "./tmp")
+	zip2cmd = "GZIP=-9 tar cvf {} {} --gzip".format(new_file, "./tmp")
 	p4 = subprocess.run([zip2cmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
 	#clean the tmp folder of any junk
 	cleancmd = "rm ./tmp/*"
