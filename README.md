@@ -16,5 +16,5 @@ Some things to note:
 # split_zip.py
 - This script is used to split 1 large archive file into 2 smaller, roughly equal, archive files. The purpose of this script is to split large archives into smaller ones, which speeds up search.py as a result.
 - Usage: ``python3 split_zip.py old.tar.gz newfile.tar.gz 2``
-- Issues: doesn't evenly split files right now, due to lack of me not wanting to make the algo for it.
+- Issues: doesn't evenly split files right now, due to lack of me not wanting to make the algo for it. To bypass this, you can just split the end result files again. This will probably be beneficial regardless.
 - Notes: be sure your target archive contains at least 2 files lol. If anyone knows a novel way of speeding this up, please let me know.
