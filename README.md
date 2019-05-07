@@ -2,6 +2,7 @@
 Some simple utilities to help with managing large sets of files.
 Some things to note:
 - These scripts were not created with safety in mind. The scripts essentially run raw os commands. If any target file contains unescaped data it could potentially cause an unintentional code execution.
+- The main usage of these scripts when I created them was to run through database dumps and organize data.
 
 # get_hash.py
 - This script is useful for hashing all the files in the superdirectory. I mostly use this to quickly verify torrent files, as well as prepare a list of hashes when uploading a torrent. Results are only saved once the script is finished running.
