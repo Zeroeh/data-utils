@@ -30,13 +30,24 @@ def main():
 	unzipcmd = "tar -xzf {}/../{} -C {}/tmp --strip-components {}".format(cwd, target_file, cwd, strip_amt)
 	p = subprocess.run([unzipcmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
 	#stage 2: get the sizes of the files and _attempt_ to split the contents into 2 even sizes portions
+	#todo: rename the files
+	flist = os.listdir(cwd+"/tmp")
+	counter = 0
+	for fl in flist:
+		extension = fl[fl.rfind("."):]
+		fpath = "/tmp/{}".format(fl)
+		fpath2 = "/tmp/{}{}".format(counter, extension)
+		results = os.stat(cwd+fpath)
+		total_size += results.st_size
+		os.rename(cwd+fpath, cwd+fpath2)
+		counter += 1
+	if VERBOSE == True:
+		print("Total size of contents: {}".format(total_size))
 	flist = os.listdir(cwd+"/tmp")
 	for fl in flist:
 		fpath = "/tmp/{}".format(fl)
 		results = os.stat(cwd+fpath)
-		total_size += results.st_size
 		file_list[fl] = results.st_size
-	print("Total size of contents: {}".format(total_size))
 	smallest_size = 0
 	largest_size = 0
 	for fl in file_list:
@@ -83,6 +94,9 @@ def main():
 	#perform the new file move first
 	p6 = subprocess.run([mv2cmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
 	p7 = subprocess.run([mv1cmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
+
+def insert(src, ins, pos):
+	return src[:pos]+ins+src[pos:]
 
 if __name__ == "__main__":
 	main()
