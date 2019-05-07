@@ -9,3 +9,8 @@ Some simple utilities to help with managing large sets of files.
 - This script invokes zgrep to search through many archives for the specified word. A thread is launched for each file found in the superdirectory. Results are continuously saved to file, so it is safe to kill the script early.
 - Usage: ``python3 search.py searchstring``
 - Issues: sometimes cannot decode certain foreign language encodings with just utf-8.
+
+# split_zip.py
+- This script is used to split 1 large archive file into 2 smaller, roughly equal, archive files.
+- Usage: ``python3 split_zip.py old.tar.gz newfile.tar.gz 2``
+- Issues: doesn't evenly split files right now.
