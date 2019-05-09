@@ -35,6 +35,11 @@ def main():
 	p = subprocess.run([unzipcmd], stdout=subprocess.PIPE, shell=True, encoding="utf-8")
 	#stage 2: get the sizes of the files and _attempt_ to split the contents into 2 even sizes portions
 	flist = os.listdir(cwd+"/tmp")
+	counts1 = 0
+	counts2 = 0
+	for xxr in flist:
+		if os.path.isfile(cwd+"/tmp/"+xxr):
+			counts1 += 1
 	counter = 0
 	for fl in flist:
 		extension = fl[fl.rfind("."):]
@@ -46,6 +51,15 @@ def main():
 		# if VERBOSE == True:
 		# 	print("Renamed {} to {}".format(cwd+fpath, cwd+fpath2))
 		counter += 1
+	flist6 = os.listdir(cwd+"/tmp")
+	for xxr in flist6:
+		if os.path.isfile(cwd+"/tmp/"+xxr):
+			counts2 +=1
+	if counts1 != counts2:
+		print("Not match: Old: {} | New: {}".format(counts1, counts2))
+		sys.exit(0)
+	else:
+		print("All files accounted for!")
 	if VERBOSE == True:
 		print("Total size of contents: {}".format(total_size))
 	flist = os.listdir(cwd+"/tmp")
